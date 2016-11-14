@@ -31,7 +31,20 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="estruturas.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node0.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node3.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
