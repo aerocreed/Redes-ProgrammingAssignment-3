@@ -6,7 +6,7 @@ extern int YES;
 extern int NO;
 
 /* students to write the following two routines, and maybe some others */
-extern void tolayer2(t_rtpkt); //tolayer2 est� definida na main
+extern void tolayer2(t_rtpkt); //tolayer2 está definida na main
 
 t_dt dt0;
 t_rtpkt packet;
@@ -15,7 +15,48 @@ void printdt0(struct distance_table *);
 
 void rtinit0()
 {
+    //----- Inicialização das estruturas
+    int i, j;
+    pkt0 = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
+    pkt0->sourceid = 0; //id do nó
 
+    //printf("NODE0: initialization event at t=%f\n", clocktime );
+    
+    //Custos dos vizinhos conhecidos do nó 0
+    dt0.costs[0][0] = 0; 
+    dt0.costs[0][1] = 1; 
+    dt0.costs[0][2] = 3; 
+    dt0.costs[0][3] = 7;
+
+    //Distâncias entre os nós que não são o nó 0
+    for (i=1; i<4; i++)
+    {   
+        for (j=0; j<4; j++)
+        { 
+            dt0.costs[i][j]=999; //Para facilitar, no exercício foi pedido para considerar infinito como sendo 999
+        }
+    } 
+
+    // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
+    // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede    
+    for(i=0; i<4; i++){
+        pkt0->mincost[0] = dt0costs[i][i];
+    }    
+    
+    //----- Exibição
+
+    printf("----- Tabela de distancias inicializada: -----\n");
+    printdt0(&dt0); /* exibe o conteúdo da tabela de distâncias após a inicialização */
+
+    pkt0->sourceid = 0; //id do nó
+
+    //Envia para os nós conectados ao nó 0(1, 2 e 3)
+    pkt0->destid = 1;
+    tolayer2(*pkt0);
+    pkt0->destid = 2;
+    tolayer2(*pkt0);
+    pkt0->destid = 3;
+    tolayer2(*pkt0);    
 }
 
 
