@@ -11,7 +11,7 @@ int connectcosts1[4] = { 1,  0,  1, 999 };
 
 /* students to write the following two routines, and maybe some others */
 t_dt dt1;
-t_rtpkt packet;
+t_rtpkt * pkt1;
 
 void printdt1(t_dt *);
 
@@ -23,28 +23,28 @@ void rtinit1()
     pkt1->sourceid = 1; //id do nó
 
     //printf("NODE0: initialization event at t=%f\n", clocktime );
-    
+
     //Custos dos vizinhos conhecidos do nó 1
-    dt1.costs[1][0] = 1; 
-    dt1.costs[1][1] = 0; 
-    dt1.costs[1][2] = 1; 
+    dt1.costs[1][0] = 1;
+    dt1.costs[1][1] = 0;
+    dt1.costs[1][2] = 1;
     dt1.costs[1][3] = 999;
 
     //Distâncias entre os nós que não são o nó 1
     for (i=1; i<4; i++)
-    {   
+    {
         for (j=0; j<4; j++)
-        { 
+        {
             dt1.costs[i][j]=999; //Para facilitar, no exercício foi pedido para considerar infinito como sendo 999
         }
-    } 
+    }
 
     // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
-    // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede    
+    // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede
     for(i=0; i<4; i++){
         pkt1->mincost[i] = dt1.costs[i][i];
-    }    
-    
+    }
+
     //----- Exibição
 
     printf("----- Tabela de distancias inicializada: -----\n");
