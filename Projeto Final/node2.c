@@ -11,7 +11,7 @@ extern void tolayer2(t_rtpkt); //tolayer2 está definida na main
 void printdt2(t_dt *dtptr);
 
 t_dt dt2;
-t_rtpkt pkt2;
+t_rtpkt * pkt2;
 
 void rtinit2()
 {

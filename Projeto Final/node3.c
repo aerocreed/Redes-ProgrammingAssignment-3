@@ -10,7 +10,7 @@ extern void tolayer2(t_rtpkt); //tolayer2 está definida na main
 
 /* students to write the following two routines, and maybe some others */
 t_dt dt3;
-t_rtpkt pkt3;
+t_rtpkt * pkt3;
 
 void rtinit3()
 {
