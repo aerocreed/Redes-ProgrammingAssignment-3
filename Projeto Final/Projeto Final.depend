@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1479074883 source:c:\users\germano\documents\universidade\redes\projeto final\projeto final\node0.c
+	<stdio.h>
+	"estruturas.h"
+
+1479074944 source:c:\users\germano\documents\universidade\redes\projeto final\projeto final\node1.c
+	<stdio.h>
+	"estruturas.h"
+
+1479075022 source:c:\users\germano\documents\universidade\redes\projeto final\projeto final\node2.c
+	<stdio.h>
+	"estruturas.h"
+
+1479073672 source:c:\users\germano\documents\universidade\redes\projeto final\projeto final\node3.c
+	<stdio.h>
+	"estruturas.h"
+
+1479074510 source:c:\users\germano\documents\universidade\redes\projeto final\projeto final\main.c
+	<stdio.h>
+	<stdlib.h>
+	"estruturas.h"
+
+1479075177 c:\users\germano\documents\universidade\redes\projeto final\projeto final\estruturas.h
+
