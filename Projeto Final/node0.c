@@ -40,7 +40,7 @@ void rtinit0()
     // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
     // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede    
     for(i=0; i<4; i++){
-        pkt0->mincost[0] = dt0costs[i][i];
+        pkt0->mincost[i] = dt0costs[i][i];
     }    
     
     //----- Exibição
