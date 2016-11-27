@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "estruturas.h"
 
 extern int TRACE;
@@ -8,8 +9,8 @@ extern int NO;
 /* students to write the following two routines, and maybe some others */
 extern void tolayer2(t_rtpkt); //tolayer2 está definida na main
 
-t_dt dt0;
-t_rtpkt packet;
+struct distance_table dt0;
+struct rtpkt * pkt0;
 
 void printdt0(struct distance_table *);
 
@@ -40,7 +41,7 @@ void rtinit0()
     // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
     // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede    
     for(i=0; i<4; i++){
-        pkt0->mincost[i] = dt0costs[i][i];
+        pkt0->mincost[i] = dt0.costs[i][i];
     }    
     
     //----- Exibição
