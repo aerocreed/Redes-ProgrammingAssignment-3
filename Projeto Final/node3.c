@@ -6,7 +6,7 @@ extern int YES;
 extern int NO;
 
 void printdt3();
-extern void tolayer2(t_rtpkt); //tolayer2 está definida na main
+extern void tolayer2(t_rtpkt); //tolayer2 estÃ¡ definida na main
 
 /* students to write the following two routines, and maybe some others */
 t_dt dt3;
@@ -14,42 +14,40 @@ t_rtpkt * pkt3;
 
 void rtinit3()
 {
-    //----- Inicialização das estruturas
+    //----- InicializaÃ§Ã£o das estruturas
     int i, j;
     pkt3 = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
-    pkt3->sourceid = 1; //id do nó
+    pkt3->sourceid = 1; //id do nÃ³
 
-    //printf("NODE0: initialization event at t=%f\n", clocktime );
-
-    //Custos dos vizinhos conhecidos do nó 3
-    dt3.costs[3][0] = 7;
-    dt3.costs[3][1] = 999;
-    dt3.costs[3][2] = 2;
-    dt3.costs[3][3] = 0;
-
-    //Distâncias entre os nós que não são o nó 3
-    for (i=1; i<4; i++)
+    //DistÃ¢ncias entre os nÃ³s que nÃ£o sÃ£o o nÃ³ 3
+    for (i=0; i<4; i++)
     {
         for (j=0; j<4; j++)
         {
-            dt3.costs[i][j]=999; //Para facilitar, no exercício foi pedido para considerar infinito como sendo 999
+            dt3.costs[i][j]=999; //Para facilitar, no exercÃ­cio foi pedido para considerar infinito como sendo 999
         }
     }
+    
+    //Custos dos vizinhos conhecidos do nÃ³ 3
+    dt3.costs[3][0] = 7;
+    dt3.costs[3][1] = 999;
+    dt3.costs[3][2] = 2;
+    dt3.costs[3][3] = 0;    
 
-    // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
-    // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede
+    // preenche a estrutura a ser enviada, pela funÃ§Ã£o tolayer2(), para os vizinhos diretamente conectados ao nÃ³ 0(1, 2 e 3, respectivamente),
+    // contendo o custo dos caminhos de custo mÃ­nimo para todos os outros nÃ³s de rede
     for(i=0; i<4; i++){
         pkt3->mincost[i] = dt3.costs[i][i];
     }
 
-    //----- Exibição
+    //----- ExibiÃ§Ã£o
 
     printf("----- Tabela de distancias inicializada: -----\n");
-    printdt3(&dt3); /* exibe o conteúdo da tabela de distâncias após a inicialização */
+    printdt3(&dt3); /* exibe o conteÃºdo da tabela de distÃ¢ncias apÃ³s a inicializaÃ§Ã£o */
 
-    pkt3->sourceid = 0; //id do nó
+    pkt3->sourceid = 0; //id do nÃ³
 
-    //Envia para os nós conectados ao nó 3(0 e 2)
+    //Envia para os nÃ³s conectados ao nÃ³ 3(0 e 2)
     pkt3->destid = 0;
     tolayer2(*pkt3);
     pkt3->destid = 2;
