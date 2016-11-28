@@ -57,7 +57,33 @@ void rtinit3()
 
 void rtupdate3(t_rtpkt *rcvdpkt)
 {
-
+    //j eh o pacote que enviou mensagem para o no X
+    int j = rcvdpkt->sourceid;
+    
+    char distanciaAtualizada = 0;
+    
+    //atualiza as distancias conhecidas de todos os vizinhos de X
+    for(int i = 0; i < 4; ++i) {
+        
+        //atualiza o que o no 3 sabe sobre a distancia (j --> i)
+        if(rcvdpkt->mincost[i] < dt3.costs[j][i])
+            dt3.costs[j][i] = rcvdpkt->mincost[i];
+        
+        //se a distancia (X --> i) ja conhecida
+        //eh maior que a distancia (X --> j) + (distancia j --> i) ....
+        //... encontramos um menor caminho =D
+        if(pkt3->mincost[i] > dt3.costs[3][j] + rcvdpkt->mincost[i]) {
+            pkt3->mincost[i] = dt3.costs[3][j] + rcvdpkt->mincost[i]; //NOVO MENOR CAMINHO ATRAVES DE X --> j --> i
+            distanciaAtualizada = 1;
+        }
+    }
+    
+    //distancia atualizada ... reenvia a matriz de X para todos os nos (para que eles tbm atualizem)
+    if(distanciaAtualizada == 1){
+        tolayer2(*pkt3);
+    }
+    
+    printdt3(&dt3);
 }
 
 
@@ -70,8 +96,3 @@ void printdt3(t_dt *dtptr)
     printf("dest 1|  %3d   %3d\n", dtptr->costs[1][0], dtptr->costs[1][2]);
     printf("     2|  %3d   %3d\n", dtptr->costs[2][0], dtptr->costs[2][2]);
 }
-
-
-
-
-
