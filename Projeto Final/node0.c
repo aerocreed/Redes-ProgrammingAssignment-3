@@ -20,15 +20,7 @@ void rtinit0()
     int i, j;
     pkt0 = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
     pkt0->sourceid = 0; //id do nó
-
-    //printf("NODE0: initialization event at t=%f\n", clocktime );
     
-    //Custos dos vizinhos conhecidos do nó 0
-    dt0.costs[0][0] = 0; 
-    dt0.costs[0][1] = 1; 
-    dt0.costs[0][2] = 3; 
-    dt0.costs[0][3] = 7;
-
     //Distâncias entre os nós que não são o nó 0
     for (i=1; i<4; i++)
     {   
@@ -37,6 +29,12 @@ void rtinit0()
             dt0.costs[i][j]=999; //Para facilitar, no exercício foi pedido para considerar infinito como sendo 999
         }
     } 
+    
+   //Custos dos vizinhos conhecidos do nó 0
+    dt0.costs[0][0] = 0; 
+    dt0.costs[0][1] = 1; 
+    dt0.costs[0][2] = 3; 
+    dt0.costs[0][3] = 7;    
 
     // preenche a estrutura a ser enviada, pela função tolayer2(), para os vizinhos diretamente conectados ao nó 0(1, 2 e 3, respectivamente),
     // contendo o custo dos caminhos de custo mínimo para todos os outros nós de rede    
