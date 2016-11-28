@@ -5,7 +5,7 @@ extern int TRACE;
 extern int YES;
 extern int NO;
 
-extern void tolayer2(t_rtpkt); //tolayer2 est· definida na main
+extern void tolayer2(t_rtpkt); //tolayer2 est√° definida na main
 
 int connectcosts1[4] = { 1,  0,  1, 999 };
 
@@ -17,42 +17,40 @@ void printdt1(t_dt *);
 
 void rtinit1()
 {
-    //----- InicializaÁ„o das estruturas
+    //----- Inicializa√ß√£o das estruturas
     int i, j;
     pkt1 = (struct rtpkt *)malloc( sizeof(struct rtpkt) );
-    pkt1->sourceid = 1; //id do nÛ
+    pkt1->sourceid = 1; //id do n√≥
 
-    //printf("NODE0: initialization event at t=%f\n", clocktime );
+    //Dist√¢ncias entre os n√≥s que n√£o s√£o o n√≥ 1
+    for (i=0; i<4; i++)
+    {
+        for (j=0; j<4; j++)
+        {
+            dt1.costs[i][j]=999; //Para facilitar, no exerc√≠cio foi pedido para considerar infinito como sendo 999
+        }
+    }
 
-    //Custos dos vizinhos conhecidos do nÛ 1
+    //Custos dos vizinhos conhecidos do n√≥ 1
     dt1.costs[1][0] = 1;
     dt1.costs[1][1] = 0;
     dt1.costs[1][2] = 1;
     dt1.costs[1][3] = 999;
-
-    //Dist‚ncias entre os nÛs que n„o s„o o nÛ 1
-    for (i=1; i<4; i++)
-    {
-        for (j=0; j<4; j++)
-        {
-            dt1.costs[i][j]=999; //Para facilitar, no exercÌcio foi pedido para considerar infinito como sendo 999
-        }
-    }
-
-    // preenche a estrutura a ser enviada, pela funÁ„o tolayer2(), para os vizinhos diretamente conectados ao nÛ 0(1, 2 e 3, respectivamente),
-    // contendo o custo dos caminhos de custo mÌnimo para todos os outros nÛs de rede
+    
+    // preenche a estrutura a ser enviada, pela fun√ß√£o tolayer2(), para os vizinhos diretamente conectados ao n√≥ 0(1, 2 e 3, respectivamente),
+    // contendo o custo dos caminhos de custo m√≠nimo para todos os outros n√≥s de rede
     for(i=0; i<4; i++){
         pkt1->mincost[i] = dt1.costs[i][i];
     }
 
-    //----- ExibiÁ„o
+    //----- Exibi√ß√£o
 
     printf("----- Tabela de distancias inicializada: -----\n");
-    printdt1(&dt1); /* exibe o conte˙do da tabela de dist‚ncias apÛs a inicializaÁ„o */
+    printdt1(&dt1); /* exibe o conte√∫do da tabela de dist√¢ncias ap√≥s a inicializa√ß√£o */
 
-    pkt1->sourceid = 0; //id do nÛ
+    pkt1->sourceid = 0; //id do n√≥
 
-    //Envia para os nÛs conectados ao nÛ 1(1 e 2)
+    //Envia para os n√≥s conectados ao n√≥ 1(1 e 2)
     pkt1->destid = 1;
     tolayer2(*pkt1);
     pkt1->destid = 2;
